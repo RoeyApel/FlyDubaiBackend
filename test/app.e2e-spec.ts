@@ -5,14 +5,19 @@ import request from 'supertest';
 import { afterAll, beforeAll, describe, it } from 'vitest';
 import { AppModule } from '../src/app.module.js';
 import { configureApp } from '../src/app.setup.js';
+import { DatabaseModule } from '../src/database/database.module.js';
 
 describe('App (e2e)', () => {
   let app: INestApplication<Server>;
 
   beforeAll(async () => {
+    // The database is swapped for an empty module so e2e tests need no Postgres.
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    })
+      .overrideModule(DatabaseModule)
+      .useModule(class StubDatabaseModule {})
+      .compile();
 
     app = moduleRef.createNestApplication<INestApplication<Server>>();
     configureApp(app);

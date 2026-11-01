@@ -1,5 +1,14 @@
 import { plainToInstance, Type } from 'class-transformer';
-import { IsEnum, IsIn, IsInt, Max, Min, validateSync } from 'class-validator';
+import {
+  IsEnum,
+  IsIn,
+  IsInt,
+  IsNotEmpty,
+  IsString,
+  Max,
+  Min,
+  validateSync,
+} from 'class-validator';
 
 export enum NodeEnv {
   Development = 'development',
@@ -35,6 +44,28 @@ export class EnvironmentVariables {
 
   @IsIn(LOG_LEVELS)
   LOG_LEVEL: LogLevel = 'info';
+
+  @IsString()
+  @IsNotEmpty()
+  DB_HOST: string;
+
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  @Max(65535)
+  DB_PORT: number = 5432;
+
+  @IsString()
+  @IsNotEmpty()
+  DB_USERNAME: string;
+
+  @IsString()
+  @IsNotEmpty()
+  DB_PASSWORD: string;
+
+  @IsString()
+  @IsNotEmpty()
+  DB_NAME: string;
 }
 
 export function validateEnv(

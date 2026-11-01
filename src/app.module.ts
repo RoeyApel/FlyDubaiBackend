@@ -6,6 +6,7 @@ import {
   type EnvironmentVariables,
   validateEnv,
 } from './config/env.validation.js';
+import { DatabaseModule } from './database/database.module.js';
 import { HealthModule } from './health/health.module.js';
 
 @Module({
@@ -20,6 +21,7 @@ import { HealthModule } from './health/health.module.js';
       useFactory: (config: ConfigService<EnvironmentVariables, true>) =>
         createLoggerParams(config.get('LOG_LEVEL', { infer: true })),
     }),
+    DatabaseModule,
     HealthModule,
   ],
 })
