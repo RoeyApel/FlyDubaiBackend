@@ -8,7 +8,6 @@ import {
 } from 'typeorm';
 import { User } from './user.entity.js';
 
-/** Only the last 4 card digits are kept; the full number and CVV never are. */
 @Entity('payments')
 export class Payment {
   @PrimaryGeneratedColumn()
@@ -24,7 +23,6 @@ export class Payment {
   @Column({ name: 'transaction_number', unique: true })
   transactionNumber: string;
 
-  /** pg returns `numeric` as a string to avoid float rounding. */
   @Column({ type: 'numeric', precision: 10, scale: 2 })
   amount: string;
 
