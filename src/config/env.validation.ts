@@ -28,10 +28,6 @@ export const LOG_LEVELS = [
 
 export type LogLevel = (typeof LOG_LEVELS)[number];
 
-/**
- * Every environment variable the service reads. Validated once at boot, so a
- * misconfigured deployment fails fast instead of at the first request.
- */
 export class EnvironmentVariables {
   @IsEnum(NodeEnv)
   NODE_ENV: NodeEnv = NodeEnv.Development;

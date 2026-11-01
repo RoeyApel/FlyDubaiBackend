@@ -1,7 +1,6 @@
 import type { Params } from 'nestjs-pino';
 import type { LogLevel } from '../../config/env.validation.js';
 
-/** Probe endpoints, left out of request logs to keep them readable. */
 const QUIET_ROUTE_SUFFIXES = ['/health'];
 
 export function createLoggerParams(level: LogLevel): Params {

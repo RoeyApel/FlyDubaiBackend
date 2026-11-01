@@ -14,10 +14,6 @@ import { Payment } from './payment.entity.js';
 import { Ride } from './ride.entity.js';
 import { User } from './user.entity.js';
 
-/**
- * One row per purchased seat. The unique (ride, row, column) constraint is
- * what prevents a seat from being sold twice; seats are 1-based.
- */
 @Entity('bookings')
 @Unique(['rideId', 'seatRow', 'seatColumn'])
 @Index(['userId'])

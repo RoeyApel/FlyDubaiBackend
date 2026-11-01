@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import type { EnvironmentVariables } from '../config/env.validation.js';
 
-/** Opens the PostgreSQL connection; feature modules register their own entities. */
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({

@@ -1,26 +1,22 @@
 # syntax=docker/dockerfile:1
 ARG NODE_IMAGE=node:22-alpine
 
-# Deps stage - installs dependencies (dev + prod) from the lockfile.
 FROM ${NODE_IMAGE} AS deps
 WORKDIR /app
 RUN corepack enable
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-# Build stage - compiles the app.
 FROM deps AS build
 COPY . .
 RUN pnpm build
 
-# Prod-deps stage - production packages only.
 FROM ${NODE_IMAGE} AS prod-deps
 WORKDIR /app
 RUN corepack enable
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
 
-# Runtime stage - prod deps + built output only, non-root.
 FROM ${NODE_IMAGE} AS runtime
 WORKDIR /app
 ENV NODE_ENV=production

@@ -13,7 +13,6 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  /** Excluded from queries by default so it never leaks into responses. */
   @Column({ name: 'password_hash', select: false })
   passwordHash: string;
 
