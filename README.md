@@ -1,6 +1,6 @@
 # FlyDubaiBackend
 
-NestJS + TypeScript backend template (ESM, pnpm, Vitest + SWC, ESLint + Prettier, pino logging, Prometheus metrics).
+NestJS + TypeScript backend template (ESM, pnpm, Vitest + SWC, ESLint + Prettier, pino logging).
 
 ## Getting started
 
@@ -11,7 +11,6 @@ pnpm dev
 ```
 
 - Health: `GET /api/v1/health`
-- Metrics: `GET /api/v1/metrics`
 
 ## Scripts
 
@@ -31,7 +30,7 @@ src/
   app.module.ts      root module
   app.setup.ts       global prefix, validation
   config/            env validation (class-validator)
-  common/            logging, metrics, shared utilities
+  common/            logging, shared utilities
   health/            health endpoint
 test/                e2e tests and test setup
 ```

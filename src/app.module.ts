@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
 import { createLoggerParams } from './common/logging/logger.config.js';
-import { MetricsModule } from './common/metrics/metrics.module.js';
 import {
   type EnvironmentVariables,
   validateEnv,
@@ -21,7 +20,6 @@ import { HealthModule } from './health/health.module.js';
       useFactory: (config: ConfigService<EnvironmentVariables, true>) =>
         createLoggerParams(config.get('LOG_LEVEL', { infer: true })),
     }),
-    MetricsModule,
     HealthModule,
   ],
 })
