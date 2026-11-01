@@ -1,22 +1,36 @@
 import type { Server } from 'node:http';
-import type { INestApplication } from '@nestjs/common';
+import { Global, type INestApplication, Module } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
+import { DataSource } from 'typeorm';
 import { afterAll, beforeAll, describe, it } from 'vitest';
 import { AppModule } from '../src/app.module.js';
 import { configureApp } from '../src/app.setup.js';
 import { DatabaseModule } from '../src/database/database.module.js';
 
+// The database is swapped for a fake DataSource so e2e tests need no Postgres.
+// It only has to satisfy the repository factories of TypeOrmModule.forFeature.
+@Global()
+@Module({
+  providers: [
+    {
+      provide: DataSource,
+      useValue: { entityMetadatas: [], options: {}, getRepository: () => ({}) },
+    },
+  ],
+  exports: [DataSource],
+})
+class StubDatabaseModule {}
+
 describe('App (e2e)', () => {
   let app: INestApplication<Server>;
 
   beforeAll(async () => {
-    // The database is swapped for an empty module so e2e tests need no Postgres.
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     })
       .overrideModule(DatabaseModule)
-      .useModule(class StubDatabaseModule {})
+      .useModule(StubDatabaseModule)
       .compile();
 
     app = moduleRef.createNestApplication<INestApplication<Server>>();
