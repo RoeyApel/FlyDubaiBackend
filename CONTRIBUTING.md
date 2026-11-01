@@ -22,19 +22,19 @@ They exist to save _your_ time and keep our review cycles fast.
 
    **Format:** `<type>(scope): <description>`
 
-   | Type       | Description                                                    |
-   | ---------- | ---------------------------------------------------------------|
-   | `feat`     | A new feature                                                  |
-   | `fix`      | A bug fix                                                       |
-   | `docs`     | Documentation changes                                           |
-   | `style`    | Code style changes (formatting, missing semicolons, etc.)       |
-   | `refactor` | Code refactoring (neither fixes a bug nor adds a feature)        |
-   | `test`     | Adding or updating tests                                         |
-   | `chore`    | Routine tasks like updating dependencies or build tools          |
-   | `build`    | Changes affecting the build system or external dependencies      |
-   | `ci`       | Changes to CI configuration files or scripts                     |
-   | `perf`     | Performance improvements                                         |
-   | `revert`   | Reverting a previous commit                                      |
+   | Type       | Description                                                 |
+   | ---------- | ----------------------------------------------------------- |
+   | `feat`     | A new feature                                               |
+   | `fix`      | A bug fix                                                   |
+   | `docs`     | Documentation changes                                       |
+   | `style`    | Code style changes (formatting, missing semicolons, etc.)   |
+   | `refactor` | Code refactoring (neither fixes a bug nor adds a feature)   |
+   | `test`     | Adding or updating tests                                    |
+   | `chore`    | Routine tasks like updating dependencies or build tools     |
+   | `build`    | Changes affecting the build system or external dependencies |
+   | `ci`       | Changes to CI configuration files or scripts                |
+   | `perf`     | Performance improvements                                    |
+   | `revert`   | Reverting a previous commit                                 |
 
    **Breaking changes:** a commit introduces a breaking API change when it has a `BREAKING CHANGE:` footer, or appends `!` after the type/scope. Breaking changes can be part of commits of any type.
 
