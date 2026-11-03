@@ -12,11 +12,11 @@ export default defineConfig({
     projects: [
       {
         extends: true,
-        test: { name: 'unit', include: ['src/**/*.spec.ts'] },
+        test: { name: 'unit', include: ['test/unit/**/*.spec.ts'] },
       },
       {
         extends: true,
-        test: { name: 'e2e', include: ['test/**/*.e2e-spec.ts'] },
+        test: { name: 'e2e', include: ['test/e2e/**/*.e2e-spec.ts'] },
       },
     ],
   },

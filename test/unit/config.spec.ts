@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { NodeEnv, validateEnv } from './env.validation.js';
+import { NodeEnv, validateEnv } from '../../src/config/env.validation.js';
 
 const REQUIRED_ENV = {
   DB_HOST: 'localhost',
   DB_USERNAME: 'user',
   DB_PASSWORD: 'password',
   DB_NAME: 'db',
+  JWT_SECRET: 'a'.repeat(32),
 };
 
 describe('validateEnv', () => {
@@ -29,6 +30,12 @@ describe('validateEnv', () => {
     expect(() => validateEnv({ ...REQUIRED_ENV, LOG_LEVEL: 'loud' })).toThrow(
       /Invalid environment configuration/,
     );
+  });
+
+  it('rejects a JWT_SECRET shorter than 32 characters', () => {
+    expect(() =>
+      validateEnv({ ...REQUIRED_ENV, JWT_SECRET: 'a'.repeat(31) }),
+    ).toThrow(/JWT_SECRET/);
   });
 
   it.each(Object.keys(REQUIRED_ENV))('requires %s', (name) => {

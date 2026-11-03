@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { Logger } from 'nestjs-pino';
 import { AppModule } from './app.module.js';
-import { configureApp } from './app.setup.js';
+import { configureApp, setupSwagger } from './app.setup.js';
 import { type EnvironmentVariables } from './config/env.validation.js';
 
 async function bootstrap(): Promise<void> {
@@ -14,6 +14,7 @@ async function bootstrap(): Promise<void> {
   app.useLogger(logger);
   app.enableShutdownHooks();
   configureApp(app);
+  setupSwagger(app);
 
   const port = config.get('PORT', { infer: true });
   await app.listen(port);

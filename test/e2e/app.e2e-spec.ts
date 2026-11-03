@@ -4,9 +4,9 @@ import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { DataSource } from 'typeorm';
 import { afterAll, beforeAll, describe, it } from 'vitest';
-import { AppModule } from '../src/app.module.js';
-import { configureApp } from '../src/app.setup.js';
-import { DatabaseModule } from '../src/database/database.module.js';
+import { AppModule } from '../../src/app.module.js';
+import { configureApp } from '../../src/app.setup.js';
+import { DatabaseModule } from '../../src/database/database.module.js';
 
 // The database is swapped for a fake DataSource so e2e tests need no Postgres.
 // It only has to satisfy the repository factories of TypeOrmModule.forFeature.
@@ -42,9 +42,9 @@ describe('App (e2e)', () => {
     await app.close();
   });
 
-  it('GET /api/v1/health reports ok', async () => {
+  it('GET /health reports ok', async () => {
     await request(app.getHttpServer())
-      .get('/api/v1/health')
+      .get('/health')
       .expect(200)
       .expect({ status: 'ok' });
   });

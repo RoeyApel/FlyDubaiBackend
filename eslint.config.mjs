@@ -23,7 +23,7 @@ export default defineConfig(
     },
   },
   {
-    files: ['**/*.spec.ts', 'test/**/*.ts'],
+    files: ['test/**/*.ts'],
     rules: {
       // supertest response bodies are typed as `any`.
       '@typescript-eslint/no-unsafe-member-access': 'off',

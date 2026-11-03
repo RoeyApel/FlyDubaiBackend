@@ -12,10 +12,11 @@ import {
 } from 'typeorm';
 import { Payment } from './payment.entity.js';
 import { Ride } from './ride.entity.js';
+import { BOOKING_SEAT_UNIQUE_CONSTRAINT } from '../types/bookings/types.js';
 import { User } from './user.entity.js';
 
 @Entity('bookings')
-@Unique(['rideId', 'seatRow', 'seatColumn'])
+@Unique(BOOKING_SEAT_UNIQUE_CONSTRAINT, ['rideId', 'seatRow', 'seatColumn'])
 @Index(['userId'])
 @Check('"seat_row" >= 1')
 @Check('"seat_column" >= 1')

@@ -7,6 +7,7 @@ import {
   IsString,
   Max,
   Min,
+  MinLength,
   validateSync,
 } from 'class-validator';
 
@@ -62,6 +63,10 @@ export class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   DB_NAME: string;
+
+  @IsString()
+  @MinLength(32)
+  JWT_SECRET: string;
 }
 
 export function validateEnv(
