@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
-import { createLoggerParams } from './common/logging/logger.config.js';
-import {
-  type EnvironmentVariables,
-  validateEnv,
-} from './config/env.validation.js';
+import { AuthModule } from './auth/auth.module.js';
 import { BookingsModule } from './bookings/bookings.module.js';
 import { BusesModule } from './buses/buses.module.js';
 import { CitiesModule } from './cities/cities.module.js';
+import { createLoggerParams } from './common/logging/logger.config.js';
+import { AppConfigModule } from './config/app-config.module.js';
+import type { EnvironmentVariables } from './config/env.validation.js';
 import { DatabaseModule } from './database/database.module.js';
 import { HealthModule } from './health/health.module.js';
 import { PaymentsModule } from './payments/payments.module.js';
@@ -17,11 +16,7 @@ import { UsersModule } from './users/users.module.js';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      cache: true,
-      validate: validateEnv,
-    }),
+    AppConfigModule,
     LoggerModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService<EnvironmentVariables, true>) =>
@@ -29,6 +24,7 @@ import { UsersModule } from './users/users.module.js';
     }),
     DatabaseModule,
     HealthModule,
+    AuthModule,
     UsersModule,
     CitiesModule,
     BusesModule,

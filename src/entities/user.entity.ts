@@ -3,14 +3,17 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
+import { USER_EMAIL_UNIQUE_CONSTRAINT } from '../types/users/types.js';
 
 @Entity('users')
+@Unique(USER_EMAIL_UNIQUE_CONSTRAINT, ['email'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column()
   email: string;
 
   @Column({ name: 'password_hash', select: false })
